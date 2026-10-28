@@ -11,6 +11,22 @@ Built for the [PayPal AI Hackathon](https://paypalaihackathon.devpost.com/) (dea
 
 > Work in progress. The repository is private until submission.
 
+## Run it
+
+Needs Node 24+ and a PayPal sandbox app (developer.paypal.com, Merchant app with Payouts enabled) plus three
+sandbox personal accounts: a buyer, a publisher and a user.
+
+```sh
+npm install
+cp .env.example .env   # fill in the app credentials and the publisher and user emails
+npm test
+```
+
+The MCP server is registered for Claude Code in `.mcp.json`: open Claude Code in this folder, approve the
+`waggle` server, and ask it to find you a tent. To use another MCP client, run `npm run mcp` over stdio.
+
+`spikes/paypal-sandbox.mjs` runs the same payment flow without an agent.
+
 ## Before submission
 
 - [ ] Open-source license, visible in the repository's About

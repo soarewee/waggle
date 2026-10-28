@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "waggle": {
+      "command": "node",
+      "args": ["--env-file-if-exists=.env", "src/index.ts"]
+    }
+  }
+}
