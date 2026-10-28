@@ -46,8 +46,10 @@ The parent project is `~/Developer/Agentic-AdFi` (private repo, Korean docs). Re
 ## Working here
 
 - Never commit `.env`, API keys or sandbox credentials. This repo will be public; keep secrets out of history.
-- Commit straight to `main`, small and often. `git pull --rebase` before pushing; never force-push `main`.
+- Commit straight to `main`. `git pull --rebase` before pushing; never force-push `main`.
   Commit as the human; never change git author settings.
+- One commit per intent, not per edit: follow-up edits from the same sitting go into that commit (amend or
+  squash local commits before pushing, never after). The team's weekly report is built from commits.
 - Commit messages:
 
   ```
