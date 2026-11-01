@@ -16,7 +16,7 @@ Built for the [PayPal AI Hackathon](https://paypalaihackathon.devpost.com/) (dea
 1. **Add Waggle to their agent.** One line, the same for everyone, no account:
 
    ```sh
-   claude mcp add --transport http waggle https://<host>/mcp
+   claude mcp add --transport http waggle https://waggle-agents.fly.dev/mcp
    ```
 
    Any MCP client with remote servers works (Claude Code, Claude Desktop, ChatGPT, Cursor). Adding it is the
@@ -112,9 +112,15 @@ purchase came through an offer. That is the next step, not this one.
 
 ## Try it (hosted demo)
 
-> Deployment URL to be added before submission.
+The demo runs at **[waggle-agents.fly.dev](https://waggle-agents.fly.dev)** on the PayPal sandbox.
 
-1. Add the install line from the front page to Claude Code, then run `claude`.
+1. In any folder, add Waggle to Claude Code and start it:
+
+   ```sh
+   claude mcp add --transport http waggle https://waggle-agents.fly.dev/mcp
+   claude
+   ```
+
 2. Ask:
 
    > I'm going camping next weekend with a friend. Find me a 2-person tent under $80 using Waggle, compare the
@@ -190,7 +196,7 @@ is fine: PayPal's checkout returns to it.
 
 ## Before submission
 
-- [ ] Deploy and put the URL in *Try it*
+- [x] Deploy and put the URL in *Try it*
 - [ ] Open-source license, visible in the repository's About
 - [ ] Make the repository public
 - [ ] Demo video under 3 minutes, public on YouTube

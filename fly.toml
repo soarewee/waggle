@@ -1,0 +1,32 @@
+# Fly.io deployment: one machine (SQLite lives on the volume, so never more than one), kept running so the
+# demo never cold-starts. Secrets (PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, PAYPAL_PUBLISHER_EMAIL) are set with
+# `fly secrets set`, never here.
+app = "waggle-agents"
+primary_region = "nrt"
+
+[env]
+  PORT = "3000"
+  WAGGLE_DB = "/data/waggle.db"
+  WAGGLE_BASE_URL = "https://waggle-agents.fly.dev"
+
+[[mounts]]
+  source = "waggle_data"
+  destination = "/data"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = "off"
+  auto_start_machines = true
+  min_machines_running = 1
+
+  [[http_service.checks]]
+    interval = "30s"
+    timeout = "5s"
+    grace_period = "10s"
+    method = "GET"
+    path = "/health"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "256mb"
