@@ -1,6 +1,7 @@
-// Demo catalog and campaigns. Brands are made up; every purchase is processed by the sandbox merchant account.
+// Demo catalog: the store Waggle stands in for during the demo. Brands are made up; every purchase is processed by the
+// sandbox merchant account. Sellers' campaigns are not here: they come from campaigns.json.
 
-import type { Campaign, Product } from "./types.ts";
+import type { Product } from "./types.ts";
 
 export const products: Product[] = [
   {
@@ -62,29 +63,6 @@ export const products: Product[] = [
     price: "89.00",
     rating: 4.7,
     summary: "Conical steel burrs, 40 grind settings, low retention.",
-  },
-];
-
-export const campaigns: Campaign[] = [
-  {
-    campaign_id: "cmp_acme_tent_fall",
-    advertiser: { name: "Acme Outdoor", id: "adv_acme_outdoor" },
-    product_id: "tent-trailhead-2",
-    deal: { kind: "discount", description: "10% off with Waggle", discount_bps: 1000 },
-    currency: "USD",
-    reward_per_conversion: "5.00",
-    max_fee_bps: 1000,
-    expires_at: "2026-12-31T23:59:59Z",
-  },
-  {
-    campaign_id: "cmp_quietwave_launch",
-    advertiser: { name: "Quietwave", id: "adv_quietwave" },
-    product_id: "headphones-quietwave",
-    deal: { kind: "coupon", description: "$15 off, code WAGGLE15", code: "WAGGLE15", discount_bps: 1163 },
-    currency: "USD",
-    reward_per_conversion: "8.00",
-    max_fee_bps: 800,
-    expires_at: "2026-12-31T23:59:59Z",
   },
 ];
 

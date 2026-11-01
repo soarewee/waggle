@@ -1,6 +1,6 @@
 {
   "name": "waggle",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Honey for agents: sponsored deals for your AI agent, with the advertiser's fee paid back to you through PayPal.",
   "type": "module",
@@ -8,7 +8,8 @@
     "node": ">=24"
   },
   "scripts": {
-    "mcp": "node --env-file-if-exists=.env src/index.ts",
+    "start": "node --env-file-if-exists=.env src/index.ts",
+    "dev": "node --watch --env-file-if-exists=.env src/index.ts",
     "test": "node --test test/*.test.ts",
     "typecheck": "tsc --noEmit"
   },

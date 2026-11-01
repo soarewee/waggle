@@ -17,17 +17,20 @@ waiting time is cut.
 | --- | --- | --- | --- |
 | 0:00–0:20 | Problem | An agent shopping for its user | Agents now shop for us. Brands pay for that attention, but the user gets nothing, and ads aimed at agents are hidden. |
 | 0:20–0:35 | One line | Advertiser, publisher, user diagram | Waggle: your agent finds the deal, PayPal pays you back. |
-| 0:35–0:50 | Install is consent | Plugin settings: categories, PayPal payback account | Opt-in is the install. Nothing reaches you unless you turned it on. |
+| 0:35–0:50 | One line is consent | Waggle front page: the install line copied into the agent | No account, no login. One line in your agent is the opt-in; nothing reaches you unless you added it. |
 | 0:50–1:25 | Agent shops | "Find me a 2-person tent under $80" → Waggle tool call → agent says "Sponsored: Acme Outdoor, 10% off" | The agent tells you it's sponsored, right when it recommends it. |
 | 1:25–1:50 | PayPal payment | Agent creates the order → PayPal sandbox approval → captured | You stay in control: you approve the payment in PayPal. |
-| 1:50–2:20 | The split | Waggle settlement view (amount, capped fee, shares) → sandbox accounts receive +$1.50 (user), +$3.50 (publisher) | One purchase, one split: publisher share and your payback, paid by PayPal Payouts. |
+| 1:50–2:20 | The split | PayPal returns to Waggle: “Paid $71.10, +$1.50 on its way to the account you paid with” → the agent confirms (fee, both payouts SUCCESS) → the sandbox account's PayPal activity shows the payout | One purchase, one split: publisher share and your payback, paid by PayPal Payouts to the account that paid. |
 | 2:20–2:45 | Trust rules, close | Consent, disclosure, fee cap, no personal data to advertisers → logo, tagline | Built on PayPal Orders and Payouts. Honey for agents. |
 
 ## What the video needs built
 
-- MCP server (shopping tool) returning organic results plus a sponsored deal.
-- A purchase tool the agent calls to create the order (step 1 of `spikes/paypal-sandbox.mjs`).
-- A settlement/payback view. Terminal logs alone are weak on design.
+- [x] MCP server (shopping tool) returning organic results plus a sponsored deal.
+- [x] A purchase tool the agent calls to create the order (step 1 of `spikes/paypal-sandbox.mjs`).
+- [x] The hosted service and site: the front page with the install line, and the return page that completes the
+  purchase and shows the payback. Those are the only web surfaces the product has, so they are the only ones the
+  video shows: no screen exists for the video's sake.
+- [ ] Deploy it, so the video shows the real URL.
 
 ## Tools
 

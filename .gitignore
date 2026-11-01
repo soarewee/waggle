@@ -1,4 +1,5 @@
 out/
+data/
 .env
 .env.*
 !.env.example
