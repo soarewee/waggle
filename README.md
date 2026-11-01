@@ -186,7 +186,7 @@ is fine: PayPal's checkout returns to it.
 ## Repository
 
 - `src/`: the service. `app.ts` (routes: front page, the MCP endpoint, PayPal return), `tools.ts` (the three MCP
-  tools), `settle.ts` (capture, payer, fee split, payouts, once), `web.ts` (the two pages), `db.ts` (SQLite),
+  tools), `settle.ts` (capture, payer, fee split, payouts, once), `web.ts` and `style.ts` (the two pages and their stylesheet), `db.ts` (SQLite),
   `paypal.ts` (Orders, Payouts), `offers.ts` and `money.ts` (matching by user benefit, fee cap and split),
   `campaigns.ts` (loads and checks the campaign file), `catalog.ts` (the demo store)
 - `campaigns.json`: the sellers' campaigns
