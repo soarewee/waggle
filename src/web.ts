@@ -20,16 +20,15 @@ export function maskEmail(email: string) {
   return `${user.slice(0, 3)}…@${domain}`;
 }
 
-const MARK = `<svg width="28" height="28" viewBox="0 0 38 38" aria-hidden="true">
-  <path d="M19 2.5 33.3 10.75v16.5L19 35.5 4.7 27.25v-16.5Z" fill="#f0b32e"/>
-  <path d="M19 9.5 27.2 14.25v9.5L19 28.5l-8.2-4.75v-9.5Z" fill="#fcefc9"/>
-  <path d="M13 19c3-4 9-4 12 0-3 4-9 4-12 0Z" fill="#8f5f06"/></svg>`;
-
-/** A hand-drawn arrow for the margin notes. `dir` is where it points. */
-const arrow = (dir: "left" | "right" | "down") => {
-  const d = { left: "M30 8C20 4 10 6 2 12m6-6L2 12l7 3", right: "M2 8c10-4 20-2 28 4m-6-6l6 6-7 3", down: "M8 2c4 10 4 18 2 28m-6-6l6 6 6-6" }[dir];
-  return `<svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
-};
+/**
+ * The mark is the waggle dance, how a bee tells the hive where the good stuff is: a straight run (honey) between two
+ * return loops (ink), tilted, because the run's angle is the direction to the find.
+ */
+const DANCE = `<g transform="rotate(-25 16 16)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M13.2 6.6C6.8 7.6 3.8 15.5 6.2 20.8c1.3 2.9 3.9 4.3 6.6 4.7M18.8 6.6c6.4 1 9.4 8.9 7 14.2-1.3 2.9-3.9 4.3-6.6 4.7" stroke="#1f1a14" stroke-width="2.2"/>
+  <path d="M16 25.5q-2.4-2.4 0-4.75t0-4.75 0-4.75 0-4.75" stroke="#e0a21c" stroke-width="2.4"/></g>`;
+const MARK = `<svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true">${DANCE}</svg>`;
+const FAVICON = `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#f7f3eb"/>${DANCE}</svg>`)}`;
 
 const COPY_SCRIPT = `<script>
   document.querySelectorAll("[data-copy]").forEach((b) => b.addEventListener("click", async () => {
@@ -42,8 +41,8 @@ function page(title: string, body: string, opts: { description?: string; nav?: b
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>${opts.description ? `<meta name="description" content="${esc(opts.description)}">` : ""}
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="${FONTS_HREF}"><style>${STYLE}</style></head><body><div class="wrap">
-<div class="nav"><a class="brand" href="/">${MARK}Waggle</a>${
+<link rel="icon" href="${FAVICON}"><link rel="stylesheet" href="${FONTS_HREF}"><style>${STYLE}</style></head><body><div class="wrap">
+<div class="nav"><a class="brand" href="/">${MARK}<span>Waggle</span></a>${
     opts.nav === false ? "" : `<nav><a href="#how">How it works</a><a href="#sellers">For sellers</a><a href="https://github.com/soarewee/waggle">GitHub</a></nav>`
   }</div>
 ${body}
@@ -90,8 +89,8 @@ function conversation(config: Config, campaigns: Campaign[]) {
       : `<p>I'd take the <b>${esc(recommended?.title ?? "first one")}</b>. Want me to buy it?</p>`;
   const paid = n ? money(n.paid) : `$${esc(recommended?.price ?? "0.00")}`;
 
-  return `<div class="chat" aria-label="Example conversation with an agent that has Waggle">
-  <div class="bar"><i></i><i></i><i></i><span>Your agent, with Waggle added</span></div>
+  return `<div class="demo"><div class="chat" aria-label="Example conversation with an agent that has Waggle">
+  <div class="bar">Your agent, with Waggle added</div>
   <div class="body">
     <div class="msg user">I'm going camping with a friend next weekend. Find me a 2-person tent under $80 and buy the one you'd recommend. Ask me before you pay.</div>
     <div class="msg agent">
@@ -100,7 +99,6 @@ function conversation(config: Config, campaigns: Campaign[]) {
       <ul class="results">${organic}</ul>
       ${sponsoredBlock}
       ${recommendation}
-      ${pick ? `<div class="annot">${arrow("left")}<span class="note">says it's sponsored right when it recommends it</span></div>` : ""}
     </div>
     <div class="msg user">Yes, go ahead.</div>
     <div class="msg agent">
@@ -113,13 +111,17 @@ function conversation(config: Config, campaigns: Campaign[]) {
       <div class="tool">complete_purchase · waggle</div>
       ${
         pick && n
-          ? `<p>Paid ${paid}, captured by PayPal. ${esc(pick.campaign.advertiser.name)}'s fee for the sale was ${money(n.fee)}: <b>${money(n.user)} was paid back</b> to the PayPal account you paid with, by PayPal Payouts, and ${money(n.publisher)} went to Waggle. <span class="status ok">Payout SUCCESS</span></p>
-      <div class="annot left"><span class="note">to the account you just paid with. nothing to set up</span>${arrow("right")}</div>`
+          ? `<p>Paid ${paid}, captured by PayPal. ${esc(pick.campaign.advertiser.name)}'s fee for the sale was ${money(n.fee)}: <b>${money(n.user)} was paid back</b> to the PayPal account you paid with, by PayPal Payouts, and ${money(n.publisher)} went to Waggle. <span class="status ok">Payout SUCCESS</span></p>`
           : `<p>Paid ${paid}, captured by PayPal. No sponsored offer was used, so there is no fee and no payback.</p>`
       }
     </div>
   </div>
-</div>`;
+</div>
+<ol class="notes">
+  <li>The search results come back complete and in their own order. The offer sits outside them, marked sponsored, with the seller's name.</li>
+  <li>When the agent recommends the sponsored tent, it says so in the same sentence, with what you get back.</li>
+  <li>You approve the payment in PayPal. The payback goes to the account you paid with; there is nothing to set up.</li>
+</ol></div>`;
 }
 
 /** The worked example: the first campaign's numbers, as a receipt. */
@@ -136,6 +138,37 @@ function receipt(campaign: Campaign, userShareBps: number) {
 </table></div>`;
 }
 
+/** How to add Waggle, one tab per client, each with the one way that client takes a remote MCP server. */
+function clientTabs(url: string) {
+  const json = JSON.stringify({ mcpServers: { waggle: { url } } }, null, 2);
+  const clients = [
+    { id: "claude-code", name: "Claude Code", how: "Run this in your terminal.", code: `claude mcp add --transport http waggle ${url}` },
+    { id: "codex", name: "Codex", how: "Run this in your terminal.", code: `codex mcp add waggle --url ${url}` },
+    { id: "claude", name: "Claude", how: "On claude.ai or in Claude Desktop, open Connectors, add a custom connector and paste this URL.", code: url },
+    { id: "chatgpt", name: "ChatGPT", how: "Turn on Developer mode, add a custom MCP server and paste this URL. Developer mode depends on your ChatGPT plan.", code: url },
+    { id: "cursor", name: "Cursor", how: "Add this to <code>~/.cursor/mcp.json</code>, or to <code>.cursor/mcp.json</code> in a project.", code: json },
+    { id: "vscode", name: "VS Code", how: "Run this in your terminal, or paste the URL into the <i>MCP: Add Server</i> command.", code: `code --add-mcp '${JSON.stringify({ name: "waggle", type: "http", url })}'` },
+    { id: "other", name: "Other", how: "Any client that takes a remote MCP server over streamable HTTP: give it this URL. No API key, no login.", code: url },
+  ];
+  const tabs = clients
+    .map((c, i) => `<button role="tab" id="tab-${c.id}" aria-controls="add-${c.id}" aria-selected="${i === 0}">${c.name}</button>`)
+    .join("");
+  const panels = clients
+    .map(
+      (c, i) => `<div role="tabpanel" id="add-${c.id}" aria-labelledby="tab-${c.id}"${i === 0 ? "" : " hidden"}><p>${c.how}</p>
+      <div class="cmd"><pre id="code-${c.id}">${esc(c.code)}</pre><button class="btn quiet" data-copy="code-${c.id}">Copy</button></div></div>`,
+    )
+    .join("");
+  return `<div class="clients"><div class="tabs" role="tablist" aria-label="Agent">${tabs}</div>${panels}</div>
+<script>
+  const tabs = document.querySelectorAll(".clients [role=tab]");
+  tabs.forEach((t) => t.addEventListener("click", () => {
+    tabs.forEach((x) => x.setAttribute("aria-selected", x === t));
+    document.querySelectorAll(".clients [role=tabpanel]").forEach((p) => (p.hidden = p.id !== t.getAttribute("aria-controls")));
+  }));
+</script>`;
+}
+
 export function landingPage(config: Config, campaigns: Campaign[]) {
   const url = `${config.baseUrl}/mcp`;
   const shown = campaigns[0];
@@ -143,30 +176,27 @@ export function landingPage(config: Config, campaigns: Campaign[]) {
   return page(
     "Waggle: Honey for agents",
     `<div class="hero">
-  <a class="badge" href="https://paypalaihackathon.devpost.com/"><i></i>Built for the PayPal AI Hackathon</a>
-  <h1>Your agent finds the deal.<br><em>PayPal pays you back.</em></h1>
+  <h1>Your agent finds the deal.<br>PayPal pays you back.</h1>
   <p class="lead">Honey for agents. When your AI agent shops for you, sellers compete for its pick. Waggle brings their offers to your agent,
   makes it say which one is sponsored, and when you buy through one, ${share} of the seller's fee comes back to you in PayPal cash.</p>
   <div class="install"><span class="prompt">$</span><code id="cc">claude mcp add --transport http waggle <span class="hl">${esc(url)}</span></code><button class="btn light" data-copy="cc">Copy</button></div>
-  <p class="hint">One line in Claude Code. <a href="#clients">Claude Desktop, ChatGPT, Cursor and other agents</a> take the same URL. No account, no login: adding it is the opt-in, removing it the opt-out.</p>
+  <p class="hint">One line in Claude Code. <a href="#clients">Codex, Claude, ChatGPT, Cursor and VS Code</a> take the same URL. No account, no login: adding it is the opt-in, removing it the opt-out.</p>
 </div>
 
 ${conversation(config, campaigns)}
 
 <section id="how">
-  <p class="eyebrow">How it works</p>
   <h2>Three steps, and you only ever talk to your agent.</h2>
   <div class="steps">
-    <div class="step"><div class="n">1</div><h3>Shop in conversation</h3><p><q>Find me a 2-person tent under $80.</q> Your agent gets the usual results, plus at most one offer, kept apart and marked sponsored with the seller's name.</p></div>
-    <div class="step"><div class="n">2</div><h3>Your agent tells you</h3><p>If it recommends the sponsored one, it says so in the same breath: who sponsors it, the deal, and what you get back. It never buys without your yes.</p></div>
-    <div class="step"><div class="n">3</div><h3>Approve, get paid back</h3><p>You approve the payment in PayPal yourself. The moment it goes through, your share of the seller's fee is on its way to the account you paid with.</p></div>
+    <div class="step"><h3><span>1</span>Shop in conversation</h3><p><q>Find me a 2-person tent under $80.</q> Your agent gets the usual results, plus at most one offer, kept apart and marked sponsored with the seller's name.</p></div>
+    <div class="step"><h3><span>2</span>Your agent tells you</h3><p>If it recommends the sponsored one, it says so in the same breath: who sponsors it, the deal, and what you get back. It never buys without your yes.</p></div>
+    <div class="step"><h3><span>3</span>Approve, get paid back</h3><p>You approve the payment in PayPal yourself. The moment it goes through, your share of the seller's fee is on its way to the account you paid with.</p></div>
   </div>
 </section>
 
 <section id="money">
   <div class="two">
     <div class="text">
-      <p class="eyebrow">How the money moves</p>
       <h2>One purchase, one split.</h2>
       <p>Sellers already pay for customers: per click to search engines, per sale to affiliate networks and coupon sites. Waggle is that
       business for the agent era, with one change: an agent is not persuaded by attention, only by terms. So the seller's fee buys a place in
@@ -178,7 +208,6 @@ ${conversation(config, campaigns)}
 </section>
 
 <section id="rules">
-  <p class="eyebrow">The rules in the code</p>
   <h2>What Waggle never does.</h2>
   <div class="rules">
     <div class="rule"><h3>Mix offers into results</h3><p>Search results are complete and in their own order. The sponsored offer sits outside them, labeled, one per search.</p></div>
@@ -192,7 +221,6 @@ ${conversation(config, campaigns)}
 <section id="sellers">
   <div class="two">
     <div class="text">
-      <p class="eyebrow">For sellers</p>
       <h2>A campaign is a product, a deal and a fee.</h2>
       <p>A seller registers a campaign: the product, an optional deal, a fee per sale and a cap on it as a share of the amount paid. ${shown ? `This is ${esc(shown.advertiser.name)}'s campaign in the demo.` : ""}</p>
       <p>Campaigns on the products a search found compete for the one slot, and the one worth the most to the user wins. The fee is charged only
@@ -204,21 +232,16 @@ ${conversation(config, campaigns)}
 </section>
 
 <section id="clients">
-  <p class="eyebrow">Add Waggle to any agent</p>
-  <h2>Same URL everywhere.</h2>
-  <p class="muted" style="font-size:16px;color:var(--ink-2)">Waggle is a remote MCP server. Any client that takes one can use it; nothing is installed on your machine.</p>
-  <div class="snippets">
-    <div class="snippet"><div class="label">Claude Code<small>terminal</small></div><code id="cc2">claude mcp add --transport http waggle ${esc(url)}</code><button class="btn quiet" data-copy="cc2">Copy</button></div>
-    <div class="snippet"><div class="label">Claude Desktop, ChatGPT<small>custom connector URL</small></div><code id="url">${esc(url)}</code><button class="btn quiet" data-copy="url">Copy</button></div>
-    <div class="snippet"><div class="label">Cursor, JSON configs<small>mcpServers entry</small></div><code id="json">{ "mcpServers": { "waggle": { "url": "${esc(url)}" } } }</code><button class="btn quiet" data-copy="json">Copy</button></div>
-  </div>
+  <h2>Add it to any agent.</h2>
+  <p class="sub">Waggle is a remote MCP server. Any client that takes one can use it; nothing is installed on your machine.</p>
+  ${clientTabs(url)}
 </section>
 ${COPY_SCRIPT}`,
     { description: "Honey for agents. When your AI agent shops, Waggle brings sponsored offers, the agent says which one is sponsored, and PayPal pays part of the seller's fee back to you." },
   );
 }
 
-const next = (text: string) => `<div class="next"><span class="n">→</span><span>${text}</span></div>`;
+const next = (text: string) => `<p class="next">${text}</p>`;
 
 /** What the buyer sees when PayPal brings them back: the purchase completed, and the payback on its way. */
 export function returnPage(s: Settlement) {
@@ -269,7 +292,7 @@ ${next("Back in your agent, say you're done. It will confirm the payment.")}</di
     <tr><td>Waggle keeps</td><td class="num">${money(order.publisher_cents!)}</td></tr>
     <tr class="sum"><td>Paid back to you</td><td class="num">+${money(order.user_cents!)}</td></tr>
   </table>
-  ${status === "UNCLAIMED" ? `<p class="muted" style="margin:12px 0 4px">PayPal is holding it until that email has a PayPal account; it will email you.</p>` : ""}
+  ${status === "UNCLAIMED" ? `<p class="muted" style="margin:12px 0 10px">PayPal is holding it until that email has a PayPal account; it will email you.</p>` : ""}
 </div>
 ${next("Back in your agent, say you're done. It will confirm the payment and the payback.")}</div>`,
     { nav: false },

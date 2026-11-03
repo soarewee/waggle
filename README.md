@@ -19,7 +19,7 @@ Built for the [PayPal AI Hackathon](https://paypalaihackathon.devpost.com/) (dea
    claude mcp add --transport http waggle https://waggle-agents.fly.dev/mcp
    ```
 
-   Any MCP client with remote servers works (Claude Code, Claude Desktop, ChatGPT, Cursor). Adding it is the
+   Any MCP client with remote servers works (Claude Code, Codex CLI, Claude Desktop, ChatGPT, Cursor). Adding it is the
    opt-in; removing it is the opt-out.
 2. **Shop in conversation.** "Find me a 2-person tent under $80." The agent gets the organic results plus at most one
    offer marked sponsored, and when it recommends that one it says so in the same breath: who sponsors it, the deal,
