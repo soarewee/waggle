@@ -11,17 +11,26 @@ In 2:45, without cuts that hide anything: whose problem it is, the agent finding
 sponsored right then, the PayPal payment, and the payback actually arriving. The demo part is a real run; only
 waiting time is cut.
 
-## Storyboard
+## Script
 
-| Time | Scene | On screen | Narration |
-| --- | --- | --- | --- |
-| 0:00–0:20 | Problem | An agent shopping for its user | Agents now shop for us. Brands pay for that attention, but the user gets nothing, and ads aimed at agents are hidden. |
-| 0:20–0:35 | One line | Advertiser, publisher, user diagram | Waggle: your agent finds the deal, PayPal pays you back. |
-| 0:35–0:50 | One line is consent | Waggle front page: the install line copied into the agent | No account, no login. One line in your agent is the opt-in; nothing reaches you unless you added it. |
-| 0:50–1:25 | Agent shops | "Find me a 2-person tent under $80" → Waggle tool call → agent says "Sponsored: Acme Outdoor, 10% off" | The agent tells you it's sponsored, right when it recommends it. |
-| 1:25–1:50 | PayPal payment | Agent creates the order → PayPal sandbox approval → captured | You stay in control: you approve the payment in PayPal. |
-| 1:50–2:20 | The split | PayPal returns to Waggle: “Paid $71.10, +$1.50 on its way to the account you paid with” → the agent confirms (fee, both payouts SUCCESS) → the sandbox account's PayPal activity shows the payout | One purchase, one split: publisher share and your payback, paid by PayPal Payouts to the account that paid. |
-| 2:20–2:45 | Trust rules, close | Consent, disclosure, fee cap, no personal data to advertisers → logo, tagline | Built on PayPal Orders and Payouts. Honey for agents. |
+About 2:40 with ~220 words of narration, so the screen gets room to show the run. The product parts are one real run on the hosted demo; only
+waiting is cut. Cards are `docs/video/flow.html` (open at 1920×1080, → or Space to advance, `#scene.step` in the
+URL jumps to a card). Read each line as its own take, so lines can be re-recorded and cut by transcript.
+
+| Time | On screen | Narration |
+| --- | --- | --- |
+| 0:00–0:12 | Terminal with the agent open, banner cleared. The camping request typed in, not sent. | AI agents are starting to shop for us. Sellers already pay to win customers like that. Today none of that money reaches you, and you can't tell when a pick was paid for. |
+| 0:12–0:30 | Cards `#0.0` (title), then `#1.0` → `#1.4`, one step per sentence. | This is Waggle: Honey for agents. A seller offers a deal and a fee. Waggle brings that offer to your agent, marked sponsored. You approve the payment in PayPal, and the seller's fee is split: part to Waggle, part back to you. |
+| 0:30–0:42 | waggle-agents.fly.dev → Copy on the install line → paste into the terminal → added. | Adding it is one line. No account, no login. Adding Waggle is the opt-in; removing it is the opt-out. |
+| 0:42–1:20 | Send the request. `search_products · waggle` → the results → the offer marked sponsored → the recommendation (zoom on the sentence that names the sponsor). | I ask for a two-person tent under eighty dollars. Waggle returns the normal results, complete and in their own order, and one offer kept apart, marked sponsored. When my agent recommends that tent, it says so in the same sentence: sponsored by Acme Outdoor, ten percent off, and a dollar fifty back to me. |
+| 1:20–1:40 | "Yes, go ahead." → `buy_product` → the PayPal link → the sandbox approval page (already logged in) → approve. | Nothing is bought without me. The agent creates a PayPal order, and I approve it myself, in PayPal. |
+| 1:40–2:15 | PayPal returns to Waggle: "Paid $71.10", "+$1.50". Back in the terminal: "Done." → `complete_purchase` → payout SUCCESS. Then sandbox.paypal.com activity with the $1.50 coming in. | PayPal brings me back to Waggle. I paid seventy-one ten. Acme's five-dollar fee is split in one step with PayPal Payouts: three fifty to Waggle, and a dollar fifty back to the account I just paid with. Nothing to set up. And here it is, in my PayPal activity. |
+| 2:15–2:40 | Cards `#2.0` → `#2.4`, one rule per sentence, then `#3.0` (end card). | A few rules are built into the code. Offers never mix into results. The best deal for you wins the slot, not the highest bidder. Sellers never see who you are. And every payment is yours to approve. Waggle. Your agent finds the deal. PayPal pays you back. |
+
+The request to type, the same as on the site:
+
+> I'm going camping with a friend next weekend. Find me a 2-person tent under $80 and buy the one you'd recommend.
+> Ask me before you pay.
 
 ## What the video needs built
 
@@ -30,7 +39,8 @@ waiting time is cut.
 - [x] The hosted service and site: the front page with the install line, and the return page that completes the
   purchase and shows the payback. Those are the only web surfaces the product has, so they are the only ones the
   video shows: no screen exists for the video's sake.
-- [ ] Deploy it, so the video shows the real URL.
+- [x] Deploy it, so the video shows the real URL (redeploy after the latest site changes).
+- [x] Title, flow, rules and end cards: `docs/video/flow.html`, in the site's type and colours.
 
 ## Tools
 
@@ -38,7 +48,7 @@ Default: record and edit in one app, either [Screen Studio](https://screen.studi
 [Prequel](https://prequel.sh/) (7-day full trial, so start it in the recording week). Both auto-zoom on clicks,
 generate captions locally and cut by deleting sentences from the transcript. Final pick at recording time.
 
-- **Diagrams and title cards:** Figma or Keynote, exported as video.
+- **Diagrams and title cards:** `docs/video/flow.html`, recorded as a screen like the rest.
 - **Captions:** generated by the recorder, burned in or uploaded to YouTube as SRT.
 - Avoid any tool tier that adds a watermark: it is a third-party mark in the video.
 - Considered and set aside: Cap (free plan is personal use only, no transcript cuts), Open Screen (archived),
@@ -47,13 +57,17 @@ generate captions locally and cut by deleting sentences from the transcript. Fin
 ## Before recording
 
 - Sandbox payouts can stay `PENDING` or `UNCLAIMED`. Check the receiving accounts and do one full rehearsal.
-- English voiceover and captions. No music, or royalty-free only.
+- English voiceover and captions. No music, or royalty-free only. A team member's voice over a synthetic one: the
+  site lost its template look, the narration shouldn't bring it back.
 - 1080p or higher; enlarge terminal and browser fonts.
+- Start with Waggle removed from the agent (`claude mcp remove waggle`), so the install scene is real.
+- Log the buyer sandbox account in to sandbox.paypal.com before recording: no password on screen.
+- Clear the agent's start banner and keep the browser free of bookmarks, extensions and other tabs: no third-party
+  marks beyond the agent's own text.
 
 ## Open
 
-- Which agent client to show on screen: a real product (Claude Desktop etc.) may hit the third-party trademark
-  rule; our own minimal agent UI is safe but more work.
-- Payment approval: user approves in a PayPal window (current spike, shows user control) vs. the agent paying
-  with a vaulted PayPal account (stronger for *Best Use of Agentic Commerce*, more work).
+- The script assumes Claude Code in a terminal (a real client, banner cleared for the trademark rule) and the
+  user approving in a PayPal window (works today; a vaulted account is stronger for *Best Use of Agentic Commerce*
+  but too much work before the deadline). Confirm both at the weekly meeting.
 - Demo product category (tent for now).

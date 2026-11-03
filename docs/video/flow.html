@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Waggle video cards</title>
+<!--
+  The cards the demo video cuts to: the title, the money flow (built up one step per narration line), the rules and
+  the end card. Open in a browser at 1920×1080 (or fullscreen), record the screen, press → or Space to advance and
+  ← to go back. Same palette and type as the site.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+  :root { --paper:#f7f3eb; --card:#fffdf9; --ink:#1f1a14; --ink-2:#564d42; --muted:#8c8276; --line:#e8e1d4; --line-2:#d8cfbe;
+    --honey:#e0a21c; --honey-deep:#8f5f06; --serif:"Instrument Serif", Georgia, serif; --sans:"Geist", system-ui, sans-serif; --mono:"Geist Mono", ui-monospace, monospace }
+  html, body { margin:0; height:100%; background:var(--paper); overflow:hidden; cursor:none }
+  body { display:grid; place-items:center; font-family:var(--sans); color:var(--ink); -webkit-font-smoothing:antialiased }
+  .stage { position:relative; width:1920px; height:1080px; flex:none; transform-origin:center }
+  .scene { position:absolute; inset:0; opacity:0; transition:opacity .5s ease; pointer-events:none }
+  .scene.on { opacity:1 }
+  .step { opacity:0; transition:opacity .45s ease }
+  .step.on { opacity:1 }
+
+  /* title and end cards */
+  .card-center { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; text-align:center }
+  .lockup { display:flex; align-items:center; gap:28px }
+  .lockup span { font:400 150px/1 var(--serif); letter-spacing:-.015em; margin-top:-10px }
+  .tagline { font:400 64px/1.1 var(--serif); letter-spacing:-.01em; margin:56px 0 0 }
+  .small { font-size:26px; color:var(--muted); margin-top:40px }
+
+  /* the flow */
+  svg text { font-family:var(--sans) }
+  .h { font:400 72px/1 var(--serif); letter-spacing:-.012em; fill:var(--ink) }
+  .node-name { font:400 50px var(--serif); fill:var(--ink) }
+  .node-sub { font-size:24px; fill:var(--muted) }
+  .lbl { font-size:25px; fill:var(--ink-2) }
+  .amt { font:500 26px var(--mono); fill:var(--ink) }
+  .amt.honey, .lbl.honey { fill:var(--honey-deep) }
+  .rail-text { font:500 26px var(--sans); letter-spacing:.04em; fill:#f6efe2 }
+  .caption { position:absolute; left:160px; right:160px; bottom:84px; font:400 34px/1.3 var(--sans); color:var(--ink-2) }
+  .caption b { font:500 26px var(--mono); color:var(--muted); margin-right:18px; vertical-align:2px }
+  .caption span { position:absolute; left:0; right:0; opacity:0; transition:opacity .35s ease } .caption span.on { opacity:1 }
+
+  /* rules */
+  .rules { padding:150px 160px 0 }
+  .rules h2 { font:400 96px/1 var(--serif); letter-spacing:-.015em; margin:0 0 64px }
+  .rules ol { list-style:none; margin:0; padding:0; counter-reset:n }
+  .rules li { counter-increment:n; display:flex; gap:32px; align-items:baseline; padding:26px 0; border-top:1px solid var(--line-2); font-size:42px; line-height:1.25 }
+  .rules li::before { content:counter(n); font:500 26px var(--mono); color:var(--muted); width:30px; flex:none }
+  .rules li small { display:block; font-size:28px; color:var(--muted); margin-top:6px }
+</style></head>
+<body>
+<div class="stage" id="stage">
+
+  <!-- 0: title -->
+  <section class="scene" data-steps="0">
+    <div class="card-center">
+      <div class="lockup"><svg width="150" height="150" viewBox="0 0 32 32" aria-hidden="true"><use href="#dance"/></svg><span>Waggle</span></div>
+      <p class="tagline">Your agent finds the deal.<br>PayPal pays you back.</p>
+    </div>
+  </section>
+
+  <!-- 1: the flow, four steps -->
+  <section class="scene" data-steps="4">
+    <svg width="1920" height="1080" viewBox="0 0 1920 1080">
+      <defs>
+        <marker id="ah" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="12" markerHeight="12" orient="auto-start-reverse">
+          <path d="M1 1.5 10 6 1 10.5" fill="none" stroke="#1f1a14" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+        <marker id="ahh" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="12" markerHeight="12" orient="auto-start-reverse">
+          <path d="M1 1.5 10 6 1 10.5" fill="none" stroke="#8f5f06" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+        <g id="dance" transform="rotate(-25 16 16)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M13.2 6.6C6.8 7.6 3.8 15.5 6.2 20.8c1.3 2.9 3.9 4.3 6.6 4.7M18.8 6.6c6.4 1 9.4 8.9 7 14.2-1.3 2.9-3.9 4.3-6.6 4.7" stroke="#1f1a14" stroke-width="2.2"/>
+          <path d="M16 25.5q-2.4-2.4 0-4.75t0-4.75 0-4.75 0-4.75" stroke="#e0a21c" stroke-width="2.4"/></g>
+      </defs>
+
+      <text class="h" x="160" y="190">One purchase, one split.</text>
+
+      <!-- the three parties -->
+      <g>
+        <rect x="160" y="300" width="380" height="170" rx="16" fill="#fffdf9" stroke="#d8cfbe" stroke-width="1.5"/>
+        <text class="node-name" x="196" y="372">Seller</text><text class="node-sub" x="196" y="420">Acme Outdoor</text>
+        <rect x="770" y="300" width="380" height="170" rx="16" fill="#fffdf9" stroke="#d8cfbe" stroke-width="1.5"/>
+        <svg x="804" y="332" width="48" height="48" viewBox="0 0 32 32"><use href="#dance"/></svg>
+        <text class="node-name" x="864" y="372">Waggle</text><text class="node-sub" x="806" y="420">added to your agent</text>
+        <rect x="1380" y="300" width="380" height="170" rx="16" fill="#fffdf9" stroke="#d8cfbe" stroke-width="1.5"/>
+        <text class="node-name" x="1416" y="372">You</text><text class="node-sub" x="1416" y="420">and your AI agent</text>
+      </g>
+
+      <!-- PayPal carries the money -->
+      <rect x="160" y="770" width="1600" height="84" rx="14" fill="#1f1a14"/>
+      <text class="rail-text" x="960" y="821" text-anchor="middle">PayPal  ·  Orders for the payment  ·  Payouts for the split</text>
+
+      <!-- 1: the seller's campaign -->
+      <g class="step" data-step="1">
+        <line x1="548" y1="385" x2="760" y2="385" stroke="#1f1a14" stroke-width="2" marker-end="url(#ah)"/>
+        <text class="lbl" x="654" y="358" text-anchor="middle">10% off</text>
+        <text class="lbl" x="654" y="424" text-anchor="middle">$5 fee</text>
+      </g>
+      <!-- 2: one offer, labeled -->
+      <g class="step" data-step="2">
+        <line x1="1158" y1="385" x2="1370" y2="385" stroke="#1f1a14" stroke-width="2" marker-end="url(#ah)"/>
+        <text class="lbl" x="1264" y="358" text-anchor="middle">1 offer</text>
+        <text class="lbl" x="1264" y="424" text-anchor="middle">sponsored</text>
+      </g>
+      <!-- 3: you pay, the seller is paid -->
+      <g class="step" data-step="3">
+        <line x1="1520" y1="478" x2="1520" y2="760" stroke="#1f1a14" stroke-width="2" marker-end="url(#ah)"/>
+        <text class="amt" x="1500" y="610" text-anchor="end">$71.10</text>
+        <text class="lbl" x="1500" y="646" text-anchor="end">you approve</text>
+        <line x1="300" y1="762" x2="300" y2="480" stroke="#1f1a14" stroke-width="2" marker-end="url(#ah)"/>
+        <text class="amt" x="280" y="610" text-anchor="end">$71.10</text>
+      </g>
+      <!-- 4: the fee, split in one step -->
+      <g class="step" data-step="4">
+        <line x1="400" y1="478" x2="400" y2="760" stroke="#1f1a14" stroke-width="2" marker-end="url(#ah)"/>
+        <text class="amt" x="420" y="610">$5.00</text>
+        <text class="lbl" x="420" y="646">fee</text>
+        <line x1="960" y1="762" x2="960" y2="480" stroke="#1f1a14" stroke-width="2" marker-end="url(#ah)"/>
+        <text class="amt" x="980" y="610">$3.50</text>
+        <text class="lbl" x="980" y="646">70%</text>
+        <line x1="1640" y1="762" x2="1640" y2="480" stroke="#8f5f06" stroke-width="2.5" marker-end="url(#ahh)"/>
+        <text class="amt honey" x="1660" y="610">+$1.50</text>
+        <text class="lbl honey" x="1660" y="646">30% to you</text>
+      </g>
+    </svg>
+    <p class="caption">
+      <span data-step="0"><b>&nbsp;</b>Three parties. PayPal carries the money.</span>
+      <span data-step="1"><b>1</b>A seller offers a deal and a fee per sale.</span>
+      <span data-step="2"><b>2</b>Waggle brings one offer to your agent, marked sponsored.</span>
+      <span data-step="3"><b>3</b>You approve the payment yourself, in PayPal.</span>
+      <span data-step="4"><b>4</b>The seller's fee is split in one step, and part of it comes back to you.</span>
+    </p>
+  </section>
+
+  <!-- 2: rules -->
+  <section class="scene rules" data-steps="4">
+    <h2>Built into the code.</h2>
+    <ol>
+      <li class="step" data-step="1"><div>Offers never mix into results.<small>One offer at most, kept apart, marked sponsored.</small></div></li>
+      <li class="step" data-step="2"><div>The best deal for you wins the slot.<small>Not the seller paying Waggle the most.</small></div></li>
+      <li class="step" data-step="3"><div>Sellers never see who you are.<small>Not your search, your conversation or your PayPal account.</small></div></li>
+      <li class="step" data-step="4"><div>Every payment is yours to approve.<small>In PayPal, every time.</small></div></li>
+    </ol>
+  </section>
+
+  <!-- 3: end card -->
+  <section class="scene" data-steps="0">
+    <div class="card-center">
+      <div class="lockup"><svg width="150" height="150" viewBox="0 0 32 32" aria-hidden="true"><use href="#dance"/></svg><span>Waggle</span></div>
+      <p class="tagline">Honey for agents.</p>
+      <p class="small">Built on PayPal Orders and Payouts · waggle-agents.fly.dev</p>
+    </div>
+  </section>
+</div>
+
+<script>
+  // Position = [scene, step]. → / Space / click go forward one step (or to the next scene), ← back.
+  const scenes = [...document.querySelectorAll(".scene")];
+  let scene = 0, step = 0;
+  const steps = (i) => Number(scenes[i].dataset.steps);
+  function render() {
+    scenes.forEach((s, i) => s.classList.toggle("on", i === scene));
+    scenes[scene].querySelectorAll("[data-step]").forEach((el) => {
+      const n = Number(el.dataset.step);
+      el.classList.toggle("on", el.closest(".caption") ? n === step : n <= step);
+    });
+    location.hash = `${scene}.${step}`;
+  }
+  function go(d) {
+    if (d > 0) { if (step < steps(scene)) step++; else if (scene < scenes.length - 1) { scene++; step = 0 } }
+    else { if (step > 0) step--; else if (scene > 0) { scene--; step = steps(scene) } }
+    render();
+  }
+  addEventListener("keydown", (e) => {
+    if (["ArrowRight", " ", "PageDown"].includes(e.key)) { e.preventDefault(); go(1) }
+    if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); go(-1) }
+  });
+  addEventListener("click", () => go(1));
+  const fit = () => { document.getElementById("stage").style.transform = `scale(${Math.min(innerWidth / 1920, innerHeight / 1080)})` };
+  addEventListener("resize", fit); fit();
+  // #scene.step in the URL jumps straight to a card, so a retake can start where it left off.
+  function fromHash() {
+    const [s0, t0] = location.hash.slice(1).split(".").map(Number);
+    if (scenes[s0]) { scene = s0; step = Math.min(t0 || 0, steps(s0)) }
+    render();
+  }
+  addEventListener("hashchange", fromHash); fromHash();
+</script>
+</body></html>
