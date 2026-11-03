@@ -124,6 +124,59 @@ function conversation(config: Config, campaigns: Campaign[]) {
 </ol></div>`;
 }
 
+/**
+ * Who pays whom in one sponsored purchase, drawn from the campaign's real numbers: the three parties on top, PayPal
+ * underneath carrying the payment (Orders) and the split (Payouts). Wide for screens, tall for phones, where the wide
+ * one's labels would shrink past reading.
+ */
+function flowDiagram(campaign: Campaign, userShareBps: number) {
+  const n = numbers(campaign, productOf(campaign), userShareBps);
+  const deal = campaign.deal?.discount_bps ? `${pct(campaign.deal.discount_bps)} off` : "a deal";
+  const fee = money(toCents(campaign.reward_per_conversion));
+  const marker = (id: string, color: string) =>
+    `<marker id="${id}" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M1 1.5 10 6 1 10.5" fill="none" stroke="${color}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>`;
+  const arrow = (x1: number, y1: number, x2: number, y2: number, id: string, honey = false) =>
+    `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" class="${honey ? "edge honey" : "edge"}" marker-end="url(#${id}${honey ? "h" : ""})"/>`;
+  const node = (x: number, y: number, w: number, h: number) => `<rect class="node" x="${x}" y="${y}" width="${w}" height="${h}" rx="12"/>`;
+  const t = (x: number, y: number, cls: string, text: string, anchor = "start") =>
+    `<text class="${cls}" x="${x}" y="${y}"${anchor === "start" ? "" : ` text-anchor="${anchor}"`}>${esc(text)}</text>`;
+  const advertiser = campaign.advertiser.name;
+
+  const wide = `<svg class="wide" viewBox="-4 -4 1032 364" role="img" aria-label="${esc(
+    `The seller offers ${deal} and a ${fee} fee to Waggle. Waggle brings one sponsored offer to you and your agent. You pay ${money(n.paid)} through PayPal, approved by you; the seller receives it. The ${money(n.fee)} fee is split by PayPal Payouts: ${money(n.publisher)} to Waggle, ${money(n.user)} back to you.`,
+  )}">
+    <defs>${marker("fw", "#1f1a14")}${marker("fwh", "#8f5f06")}</defs>
+    ${node(0, 0, 240, 104)}${t(20, 46, "nm", "Seller")}${t(20, 78, "sub", advertiser)}
+    ${node(390, 0, 240, 104)}<svg x="408" y="20" width="30" height="30" viewBox="0 0 32 32">${DANCE}</svg>${t(446, 46, "nm", "Waggle")}${t(410, 78, "sub", "added to your agent")}
+    ${node(780, 0, 240, 104)}${t(800, 46, "nm", "You")}${t(800, 78, "sub", "and your AI agent")}
+    ${arrow(248, 52, 380, 52, "fw")}${t(314, 38, "lbl", deal, "middle")}${t(314, 78, "lbl", `${fee} fee`, "middle")}
+    ${arrow(638, 52, 770, 52, "fw")}${t(704, 38, "lbl", "1 offer", "middle")}${t(704, 78, "lbl", "sponsored", "middle")}
+    <rect class="rail" x="0" y="296" width="1020" height="56" rx="10"/>${t(510, 330, "rail-t", "PayPal  ·  Orders for the payment  ·  Payouts for the split", "middle")}
+    ${arrow(80, 288, 80, 112, "fw")}${t(68, 196, "amt", money(n.paid), "end")}
+    ${arrow(150, 112, 150, 288, "fw")}${t(162, 196, "amt", money(n.fee))}${t(162, 218, "lbl", "fee")}
+    ${arrow(510, 288, 510, 112, "fw")}${t(522, 196, "amt", money(n.publisher))}${t(522, 218, "lbl", pct(10000 - userShareBps))}
+    ${arrow(860, 112, 860, 288, "fw")}${t(848, 196, "amt", money(n.paid), "end")}${t(848, 218, "lbl", "you approve", "end")}
+    ${arrow(920, 288, 920, 112, "fw", true)}${t(932, 196, "amt honey", `+${money(n.user)}`)}${t(932, 218, "lbl honey", `${pct(userShareBps)} to you`)}
+  </svg>`;
+
+  const tall = `<svg class="tall" viewBox="0 -2 360 372" aria-hidden="true">
+    <defs>${marker("ft", "#1f1a14")}${marker("fth", "#8f5f06")}</defs>
+    ${node(0, 0, 164, 64)}${t(14, 30, "nm", "Seller")}${t(14, 50, "sub", advertiser)}
+    ${node(0, 152, 164, 64)}<svg x="13" y="162" width="22" height="22" viewBox="0 0 32 32">${DANCE}</svg>${t(40, 182, "nm", "Waggle")}${t(14, 202, "sub", "added to your agent")}
+    ${node(0, 304, 164, 64)}${t(14, 334, "nm", "You")}${t(14, 354, "sub", "and your AI agent")}
+    ${arrow(28, 72, 28, 144, "ft")}${t(42, 112, "lbl", `${deal}, ${fee} fee`)}
+    ${arrow(28, 224, 28, 296, "ft")}${t(42, 264, "lbl", "1 offer, sponsored")}
+    <rect class="rail" x="334" y="0" width="26" height="368" rx="8"/><text class="rail-t" transform="translate(347 184) rotate(90)" text-anchor="middle" dy="4">PayPal</text>
+    ${arrow(326, 22, 172, 22, "ft")}${t(250, 15, "amt", `${money(n.paid)} sale`, "middle")}
+    ${arrow(172, 52, 326, 52, "ft")}${t(250, 45, "amt", `${money(n.fee)} fee`, "middle")}
+    ${arrow(326, 190, 172, 190, "ft")}${t(250, 183, "amt", `${money(n.publisher)} to Waggle`, "middle")}
+    ${arrow(172, 322, 326, 322, "ft")}${t(250, 315, "amt", `${money(n.paid)} you pay`, "middle")}
+    ${arrow(326, 352, 172, 352, "ft", true)}${t(250, 345, "amt honey", `+${money(n.user)} back to you`, "middle")}
+  </svg>`;
+
+  return `<figure class="flow">${wide}${tall}</figure>`;
+}
+
 /** The worked example: the first campaign's numbers, as a receipt. */
 function receipt(campaign: Campaign, userShareBps: number) {
   const p = productOf(campaign);
@@ -195,9 +248,10 @@ ${conversation(config, campaigns)}
 </section>
 
 <section id="money">
+  <h2>One purchase, one split.</h2>
+  ${shown ? flowDiagram(shown, config.userShareBps) : ""}
   <div class="two">
     <div class="text">
-      <h2>One purchase, one split.</h2>
       <p>Sellers already pay for customers: per click to search engines, per sale to affiliate networks and coupon sites. Waggle is that
       business for the agent era, with one change: an agent is not persuaded by attention, only by terms. So the seller's fee buys a place in
       front of an agent that is comparing right now, is paid only when the purchase is captured, and ${share} of it is yours.</p>

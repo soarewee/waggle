@@ -12,8 +12,8 @@
   :root { --paper:#f7f3eb; --card:#fffdf9; --ink:#1f1a14; --ink-2:#564d42; --muted:#8c8276; --line:#e8e1d4; --line-2:#d8cfbe;
     --honey:#e0a21c; --honey-deep:#8f5f06; --serif:"Instrument Serif", Georgia, serif; --sans:"Geist", system-ui, sans-serif; --mono:"Geist Mono", ui-monospace, monospace }
   html, body { margin:0; height:100%; background:var(--paper); overflow:hidden; cursor:none }
-  body { display:grid; place-items:center; font-family:var(--sans); color:var(--ink); -webkit-font-smoothing:antialiased }
-  .stage { position:relative; width:1920px; height:1080px; flex:none; transform-origin:center }
+  body { font-family:var(--sans); color:var(--ink); -webkit-font-smoothing:antialiased }
+  .stage { position:absolute; left:50%; top:50%; width:1920px; height:1080px; transform-origin:center }
   .scene { position:absolute; inset:0; opacity:0; transition:opacity .5s ease; pointer-events:none }
   .scene.on { opacity:1 }
   .step { opacity:0; transition:opacity .45s ease }
@@ -174,7 +174,7 @@
     if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); go(-1) }
   });
   addEventListener("click", () => go(1));
-  const fit = () => { document.getElementById("stage").style.transform = `scale(${Math.min(innerWidth / 1920, innerHeight / 1080)})` };
+  const fit = () => { document.getElementById("stage").style.transform = `translate(-50%, -50%) scale(${Math.min(innerWidth / 1920, innerHeight / 1080)})` };
   addEventListener("resize", fit); fit();
   // #scene.step in the URL jumps straight to a card, so a retake can start where it left off.
   function fromHash() {

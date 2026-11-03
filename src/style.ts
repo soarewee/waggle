@@ -101,6 +101,22 @@ export const STYLE = `
   tr.sum td.num { color:var(--honey-deep) }
   .big { font:400 44px/1 var(--serif); letter-spacing:-.01em; font-variant-numeric:tabular-nums }
 
+  /* who pays whom: drawn as inline SVG so it takes the page's type and colours */
+  .flow { margin:36px 0 56px }
+  .flow svg { display:block; width:100%; height:auto; overflow:visible } .flow .tall { display:none; max-width:30rem }
+  .flow .node { fill:var(--card); stroke:var(--line-2); stroke-width:1.2 }
+  .flow .edge { stroke:var(--ink); stroke-width:1.5 } .flow .edge.honey { stroke:var(--honey-deep); stroke-width:2 }
+  .flow .rail { fill:var(--ink) }
+  .flow text { font-family:var(--sans) }
+  .flow .nm { font:400 30px var(--serif); fill:var(--ink) }
+  .flow .sub { font-size:15px; fill:var(--muted) }
+  .flow .lbl { font-size:15px; fill:var(--ink-2) }
+  .flow .amt { font:500 15px var(--mono); fill:var(--ink) }
+  .flow .honey.amt, .flow .honey.lbl { fill:var(--honey-deep) }
+  .flow .rail-t { font:500 16px var(--sans); letter-spacing:.03em; fill:#f6efe2 }
+  .flow .tall .nm { font-size:21px } .flow .tall .sub, .flow .tall .lbl { font-size:12px } .flow .tall .amt { font-size:11.5px }
+  .flow .tall .rail-t { font-size:12px; letter-spacing:.06em }
+
   .rules { display:grid; grid-template-columns:1fr 1fr; gap:0 48px; margin-top:28px }
   .rule { padding:16px 0 20px; border-top:1px solid var(--line) }
   .rule p { color:var(--ink-2); font-size:15.5px; margin:0 }
@@ -128,6 +144,7 @@ export const STYLE = `
   .payback .big { color:var(--honey-deep) }
   .next { margin:24px 0 0; padding-top:14px; border-top:1px solid var(--line); color:var(--ink-2); font-size:14.5px }
 
+  @media (max-width: 900px) { .flow .wide { display:none } .flow .tall { display:block } }
   @media (max-width: 1080px) {
     .demo { grid-template-columns:1fr; gap:24px }
     .notes { padding:0; display:grid; grid-template-columns:repeat(3, 1fr); gap:24px }
