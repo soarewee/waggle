@@ -14,7 +14,7 @@ const config: Config = {
   campaignsPath: "campaigns.json",
   paypal: { clientId: "x", clientSecret: "x" },
   publisher: { id: "waggle", paypalEmail: "publisher@example.com" },
-  userShareBps: 3000,
+  userShareBps: 7000,
 };
 const campaigns = loadCampaigns(new URL("../campaigns.json", import.meta.url).pathname);
 
@@ -97,7 +97,7 @@ test("the front page carries the one install line, the money flow and the rules"
   const { text } = await page("/");
   assert.match(text, /claude mcp add --transport http waggle http:\/\/localhost\/mcp</);
   assert.match(text, /No account, no login/);
-  assert.match(text, /Paid back to you.*\+\$1\.50/s);
+  assert.match(text, /Paid back to you.*\+\$3\.50/s);
   assert.match(text, /What Waggle never does/);
   assert.match(text, /&quot;campaign_id&quot;: &quot;cmp_acme_tent_fall&quot;/);
 });
@@ -117,21 +117,21 @@ test("search returns organic results and one disclosed offer the model can read"
   assert.match(res.content[0].text, /Ridgeline 2P backpacking tent/, "every organic result stays, campaigns don't touch the list");
   assert.equal(res.content.length, 2, "at most one sponsored block");
   assert.match(res.content[1].text, /Sponsored by Acme Outdoor/);
-  assert.match(res.content[1].text, /pays the user back \$1\.50/);
+  assert.match(res.content[1].text, /pays the user back \$3\.50/);
   const offer = res._meta["agentic-adfi/offer"];
   assert.equal(offer.sponsored, true);
   assert.equal(offer.price.with_deal, "71.10");
 });
 
 test("the slot goes to the offer that is best for the user, not to the highest fee", async () => {
-  // Northpine pays Waggle $6.00 per sale against Acme's $5.00, but gives the user $1.80 against Acme's $7.90 + $1.50.
+  // Northpine pays Waggle $6.00 per sale against Acme's $5.00, but gives the user $4.20 against Acme's $7.90 + $3.50.
   const call = await agent();
   const tents = await call("search_products", { query: "tent" });
   assert.equal(tents._meta["agentic-adfi/offer"].advertiser.name, "Acme Outdoor");
   // When only Northpine's product matches, its campaign is the one that can run.
   const ultralight = await call("search_products", { query: "ultralight" });
   assert.equal(ultralight._meta["agentic-adfi/offer"].advertiser.name, "Northpine");
-  assert.equal(ultralight._meta["agentic-adfi/offer"].payback_estimate, "1.80");
+  assert.equal(ultralight._meta["agentic-adfi/offer"].payback_estimate, "4.20");
 });
 
 test("no offer where no campaign runs", async () => {
@@ -163,18 +163,18 @@ test("sponsored purchase: discounted order, completed on PayPal's return, paybac
   const back = await page(`/return?token=${orderId}&PayerID=P`);
   assert.match(back.text, /Paid \$71\.10\./);
   assert.match(back.text, /paid with dav…@personal\.example\.com/, "the account is shown masked, to the buyer only");
-  assert.match(back.text, /\+\$1\.50/);
+  assert.match(back.text, /\+\$3\.50/);
   assert.match(back.text, /Paid back/);
   const payout = payouts().at(-1)!;
   assert.equal(payout.requestId, `waggle:${offer.offer_id}:payout`);
   assert.equal(payout.body.sender_batch_header.sender_batch_id, `waggle:${offer.offer_id}`);
-  assert.deepEqual(payout.body.items.map((i: any) => [i.receiver, i.amount.value]), [["publisher@example.com", "3.50"], ["dave@personal.example.com", "1.50"]]);
+  assert.deepEqual(payout.body.items.map((i: any) => [i.receiver, i.amount.value]), [["publisher@example.com", "1.50"], ["dave@personal.example.com", "3.50"]]);
 
   // The agent confirms afterwards: same result, nothing paid twice, and the buyer's account never reaches the agent.
   const before = payouts().length;
   const done = await call("complete_purchase", { order_id: orderId });
   assert.match(done.text, /Paid \$71\.10 for Trailhead 2-person tent/);
-  assert.match(done.text, /Payback to the PayPal account the user paid with: \$1\.50 \[SUCCESS\]/);
+  assert.match(done.text, /Payback to the PayPal account the user paid with: \$3\.50 \[SUCCESS\]/);
   assert.ok(!done.text.includes("dave@"), "no email in what the agent gets");
   assert.equal(payouts().length, before);
   assert.equal(fake.calls.filter((c) => c.method === "captureOrder").length, 1);

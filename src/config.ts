@@ -28,6 +28,6 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): Config {
     campaignsPath: env.WAGGLE_CAMPAIGNS || "campaigns.json",
     paypal: { clientId: env.PAYPAL_CLIENT_ID!, clientSecret: env.PAYPAL_CLIENT_SECRET! },
     publisher: { id: env.WAGGLE_PUBLISHER_ID || "waggle", paypalEmail: env.PAYPAL_PUBLISHER_EMAIL! },
-    userShareBps: Number(env.WAGGLE_USER_SHARE_BPS || 3000),
+    userShareBps: Number(env.WAGGLE_USER_SHARE_BPS || 7000),
   };
 }

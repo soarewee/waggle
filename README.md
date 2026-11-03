@@ -35,13 +35,14 @@ site has only the front page with the install line and the page PayPal returns t
 
 Sellers already pay for customers: per click to search engines, per sale to affiliate networks and coupon sites.
 Honey was exactly that business: merchants paid it an affiliate commission on purchases where it had applied a
-coupon, and PayPal bought it for $4B. Rakuten shares such commissions with its users as cashback. Waggle is that
+coupon, and PayPal bought it for $4B. Rakuten shares such commissions with its users as cashback, and Brave pays
+the users who opt into its ads 70% of the ad revenue; Waggle gives the user the same 70% of each fee. Waggle is that
 model for the agent era, with one change of counterpart: the one choosing is now the user's agent, and an agent is
 not persuaded by attention, only by terms. The seller's fee buys a place in front of an agent that is comparing
 right now, and it is paid only when the purchase is captured, capped at a share of the amount.
 
 In the demo catalog, Acme Outdoor's campaign on a $79 tent gives 10% off and pays a $5.00 fee per sale, capped at
-10% of what was paid. The buyer pays $71.10; of the $5.00 fee, $1.50 (30%) goes back to the buyer and $3.50 to
+10% of what was paid. The buyer pays $71.10; of the $5.00 fee, $3.50 (70%) goes back to the buyer and $1.50 to
 Waggle. If the agent had picked another tent, nothing would have been paid to anyone.
 
 ## What Waggle never does
@@ -129,9 +130,9 @@ The demo runs at **[waggle-agents.fly.dev](https://waggle-agents.fly.dev)** on t
    The agent compares the organic tents with the sponsored Acme Outdoor offer and tells you it is sponsored and
    what you get back. Say yes, open the PayPal link, log in with a sandbox *personal* account (every PayPal developer
    account has one under Testing Tools → Sandbox Accounts; the password is under ⋯ → View/Edit account), approve.
-3. PayPal brings you back to Waggle: **Paid $71.10**, **+$1.50 paid back** to the account you paid with. Tell the
+3. PayPal brings you back to Waggle: **Paid $71.10**, **+$3.50 paid back** to the account you paid with. Tell the
    agent you're done; it confirms the capture and the payout.
-4. In [sandbox.paypal.com](https://www.sandbox.paypal.com) that account shows the $71.10 payment out and the $1.50
+4. In [sandbox.paypal.com](https://www.sandbox.paypal.com) that account shows the $71.10 payment out and the $3.50
    payout in. Every call is also listed under **Event Logs** on developer.paypal.com.
 
 Other things to ask for: noise-cancelling headphones (a sponsored coupon), an ultralight tent (a payback with no
@@ -172,7 +173,7 @@ is fine: PayPal's checkout returns to it.
 | `PORT` | `3000` | |
 | `WAGGLE_DB` | `data/waggle.db` | SQLite file |
 | `WAGGLE_CAMPAIGNS` | `campaigns.json` | The sellers' campaigns |
-| `WAGGLE_USER_SHARE_BPS` | `3000` | The user's share of each fee, in basis points (3000 = 30%) |
+| `WAGGLE_USER_SHARE_BPS` | `7000` | The user's share of each fee, in basis points (7000 = 70%) |
 
 ### Troubleshooting
 
