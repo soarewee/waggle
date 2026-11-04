@@ -7,8 +7,8 @@ export const FONTS_HREF =
 
 export const STYLE = `
   :root {
-    --paper:#f7f3eb; --paper-2:#efe9dd; --card:#fffdf9; --ink:#1f1a14; --ink-2:#564d42; --muted:#8c8276;
-    --line:#e8e1d4; --line-2:#d8cfbe;
+    --paper:#f4f4f4; --paper-2:#e9e9e9; --card:#ffffff; --ink:#111111; --ink-2:#4a4a4a; --muted:#767676;
+    --line:#e4e4e4; --line-2:#d4d4d4;
     --honey:#f0b32e; --honey-deep:#8f5f06; --honey-soft:#fcefc9; --honey-line:#efd89a;
     --ok:#1b7a49; --ok-soft:#ddf1e5; --bad:#b4261e; --bad-soft:#f9e2df;
     --sans:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -37,8 +37,8 @@ export const STYLE = `
   h1 { font:400 clamp(44px, 7vw, 74px)/1.02 var(--serif); letter-spacing:-.018em; margin:0 0 22px; text-wrap:balance }
   .lead { font-size:19px; line-height:1.55; color:var(--ink-2); max-width:37rem; margin:0 0 32px; text-wrap:pretty }
 
-  .install { display:flex; align-items:center; gap:10px; background:var(--ink); color:#f6efe2; border-radius:10px; padding:7px 7px 7px 16px }
-  .install .prompt { color:#9f9484; font:14px var(--mono); user-select:none }
+  .install { display:flex; align-items:center; gap:10px; background:var(--ink); color:#f2f2f2; border-radius:10px; padding:7px 7px 7px 16px }
+  .install .prompt { color:#8a8a8a; font:14px var(--mono); user-select:none }
   .install code { flex:1; font:13.5px/1.5 var(--mono); white-space:nowrap; overflow-x:auto; scrollbar-width:none; padding:6px 0 }
   .install code::-webkit-scrollbar { display:none }
   .install .hl { color:var(--honey) }
@@ -113,7 +113,7 @@ export const STYLE = `
   .flow .lbl { font-size:15px; fill:var(--ink-2) }
   .flow .amt { font:500 15px var(--mono); fill:var(--ink) }
   .flow .honey.amt, .flow .honey.lbl { fill:var(--honey-deep) }
-  .flow .rail-t { font:500 16px var(--sans); letter-spacing:.03em; fill:#f6efe2 }
+  .flow .rail-t { font:500 16px var(--sans); letter-spacing:.03em; fill:#f2f2f2 }
   .flow .tall .nm { font-size:21px } .flow .tall .sub, .flow .tall .lbl { font-size:12px } .flow .tall .amt { font-size:11.5px }
   .flow .tall .rail-t { font-size:14px; letter-spacing:.08em }
 
@@ -121,7 +121,7 @@ export const STYLE = `
   .rule { padding:16px 0 20px; border-top:1px solid var(--line) }
   .rule p { color:var(--ink-2); font-size:15.5px; margin:0 }
 
-  pre { margin:0; background:var(--ink); color:#efe7d8; border-radius:10px; padding:16px 18px; font:13px/1.55 var(--mono); overflow-x:auto; white-space:pre }
+  pre { margin:0; background:var(--ink); color:#f2f2f2; border-radius:10px; padding:16px 18px; font:13px/1.55 var(--mono); overflow-x:auto; white-space:pre }
   .clients { margin-top:28px }
   .tabs { display:flex; gap:24px; border-bottom:1px solid var(--line-2); overflow-x:auto; scrollbar-width:none } .tabs::-webkit-scrollbar { display:none }
   .tabs button { flex:none; background:none; border:0; border-bottom:2px solid transparent; margin-bottom:-1px; padding:0 0 11px; cursor:pointer;

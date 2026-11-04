@@ -25,10 +25,10 @@ export function maskEmail(email: string) {
  * return loops (ink), tilted, because the run's angle is the direction to the find.
  */
 const DANCE = `<g transform="rotate(-25 16 16)" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M13.2 6.6C6.8 7.6 3.8 15.5 6.2 20.8c1.3 2.9 3.9 4.3 6.6 4.7M18.8 6.6c6.4 1 9.4 8.9 7 14.2-1.3 2.9-3.9 4.3-6.6 4.7" stroke="#1f1a14" stroke-width="2.2"/>
+  <path d="M13.2 6.6C6.8 7.6 3.8 15.5 6.2 20.8c1.3 2.9 3.9 4.3 6.6 4.7M18.8 6.6c6.4 1 9.4 8.9 7 14.2-1.3 2.9-3.9 4.3-6.6 4.7" stroke="#111111" stroke-width="2.2"/>
   <path d="M16 25.5q-2.4-2.4 0-4.75t0-4.75 0-4.75 0-4.75" stroke="#e0a21c" stroke-width="2.4"/></g>`;
 const MARK = `<svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true">${DANCE}</svg>`;
-const FAVICON = `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#f7f3eb"/>${DANCE}</svg>`)}`;
+const FAVICON = `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#f2f2f2"/>${DANCE}</svg>`)}`;
 
 const COPY_SCRIPT = `<script>
   document.querySelectorAll("[data-copy]").forEach((b) => b.addEventListener("click", async () => {
@@ -145,7 +145,7 @@ function flowDiagram(campaign: Campaign, userShareBps: number) {
   const wide = `<svg class="wide" viewBox="-4 -4 1032 364" role="img" aria-label="${esc(
     `The seller offers ${deal} and a ${fee} fee to Waggle. Waggle brings one sponsored offer to you and your agent. You pay ${money(n.paid)} through PayPal, approved by you; the seller receives it. The ${money(n.fee)} fee is split by PayPal Payouts: ${money(n.publisher)} to Waggle, ${money(n.user)} back to you.`,
   )}">
-    <defs>${marker("fw", "#1f1a14")}${marker("fwh", "#8f5f06")}</defs>
+    <defs>${marker("fw", "#111111")}${marker("fwh", "#8f5f06")}</defs>
     ${node(0, 0, 240, 104)}${t(20, 46, "nm", "Seller")}${t(20, 78, "sub", advertiser)}
     ${node(390, 0, 240, 104)}<svg x="408" y="20" width="30" height="30" viewBox="0 0 32 32">${DANCE}</svg>${t(446, 46, "nm", "Waggle")}${t(410, 78, "sub", "added to your agent")}
     ${node(780, 0, 240, 104)}${t(800, 46, "nm", "You")}${t(800, 78, "sub", "and your AI agent")}
@@ -160,7 +160,7 @@ function flowDiagram(campaign: Campaign, userShareBps: number) {
   </svg>`;
 
   const tall = `<svg class="tall" viewBox="0 -2 360 372" aria-hidden="true">
-    <defs>${marker("ft", "#1f1a14")}${marker("fth", "#8f5f06")}</defs>
+    <defs>${marker("ft", "#111111")}${marker("fth", "#8f5f06")}</defs>
     ${node(0, 0, 164, 64)}${t(14, 30, "nm", "Seller")}${t(14, 50, "sub", advertiser)}
     ${node(0, 152, 164, 64)}<svg x="13" y="162" width="22" height="22" viewBox="0 0 32 32">${DANCE}</svg>${t(40, 182, "nm", "Waggle")}${t(14, 202, "sub", "added to your agent")}
     ${node(0, 304, 164, 64)}${t(14, 334, "nm", "You")}${t(14, 354, "sub", "and your AI agent")}
