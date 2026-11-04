@@ -30,7 +30,7 @@ scenes with no clicks.
 
 | Time | On screen | Narration |
 | --- | --- | --- |
-| 0:00–0:12 | Browser: waggle-agents.fly.dev at the top, as it is. No zoom yet. | AI agents are starting to shop for us. Sellers already pay to get picked. Today, you get nothing. And you can't even tell when a pick was an ad. |
+| 0:00–0:12 | Browser: waggle-agents.fly.dev at the top, as it is. No zoom yet. | AI agents are starting to shop for us. Sellers already pay to get in front of you. Today, you get nothing. And you can't even tell when a pick was an ad. |
 | 0:12–0:20 | Zoom on the headline. | This is Waggle. Honey for agents. Sellers send their deals to your agent. Your agent tells you which one is sponsored. And part of the seller's fee goes back to you. |
 | 0:20–0:34 | Zoom on the install line → Copy. ⌘Tab to the terminal, at the shell prompt in an empty folder: paste → added → `claude` → the agent opens. | Adding it is one line. In the shell. No account. No login. Add it, and you're in. Remove it, and you're out. Now I start my agent. |
 | 0:34–1:10 | Terminal: type and send the request. `search_products · waggle` → the results → the offer marked sponsored → the recommendation (zoom on the sentence that names the sponsor). | I ask for a two-person tent under eighty dollars. Waggle gives me the normal results. All of them, same order as always. And one offer on the side, marked sponsored. My agent picks that tent, and it says so, right there: sponsored by Acme Outdoor. Ten percent off. And three fifty back to me. |
