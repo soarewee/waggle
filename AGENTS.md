@@ -18,8 +18,8 @@ Full notes (Korean): `~/Developer/Agentic-AdFi/docs/events/paypal-ai.md`. What d
 - Judged equally on technical implementation, design (a complete product experience), impact, innovation and
   the video. Target prize: *Best Use of Agentic Commerce*.
 - Everything is in English: README, run instructions, UI, video.
-- At submission the repo must be public with an open-source license visible in the About. Until then it is
-  private, and the license type is still open (team meeting).
+- At submission the repo must be public with an open-source license visible in the About. It is public, under
+  the MIT license (`LICENSE`).
 
 ## Product rules (from AdFi, keep them)
 

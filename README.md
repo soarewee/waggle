@@ -9,7 +9,7 @@ user as a payback through PayPal.
 
 Built for the [PayPal AI Hackathon](https://paypalaihackathon.devpost.com/) (deadline Nov 12, 2026, noon PT).
 
-> Work in progress. The repository is private until submission.
+> Work in progress.
 
 ## What a user does
 
@@ -195,9 +195,13 @@ is fine: PayPal's checkout returns to it.
 - `spikes/paypal-sandbox.mjs`: the first sandbox spike of the payment and payout flow, without an agent
 - `docs/`: the demo video plan
 
+## License
+
+[MIT](LICENSE).
+
 ## Before submission
 
 - [x] Deploy and put the URL in *Try it*
-- [ ] Open-source license, visible in the repository's About
-- [ ] Make the repository public
+- [x] Make the repository public
+- [x] Open-source license, visible in the repository's About
 - [ ] Demo video under 3 minutes, public on YouTube
