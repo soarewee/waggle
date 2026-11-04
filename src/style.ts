@@ -115,7 +115,7 @@ export const STYLE = `
   .flow .honey.amt, .flow .honey.lbl { fill:var(--honey-deep) }
   .flow .rail-t { font:500 16px var(--sans); letter-spacing:.03em; fill:#f6efe2 }
   .flow .tall .nm { font-size:21px } .flow .tall .sub, .flow .tall .lbl { font-size:12px } .flow .tall .amt { font-size:11.5px }
-  .flow .tall .rail-t { font-size:12px; letter-spacing:.06em }
+  .flow .tall .rail-t { font-size:14px; letter-spacing:.08em }
 
   .rules { display:grid; grid-template-columns:1fr 1fr; gap:0 48px; margin-top:28px }
   .rule { padding:16px 0 20px; border-top:1px solid var(--line) }

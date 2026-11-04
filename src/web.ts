@@ -166,12 +166,12 @@ function flowDiagram(campaign: Campaign, userShareBps: number) {
     ${node(0, 304, 164, 64)}${t(14, 334, "nm", "You")}${t(14, 354, "sub", "and your AI agent")}
     ${arrow(28, 72, 28, 144, "ft")}${t(42, 112, "lbl", `${deal}, ${fee} fee`)}
     ${arrow(28, 224, 28, 296, "ft")}${t(42, 264, "lbl", "1 offer, sponsored")}
-    <rect class="rail" x="334" y="0" width="26" height="368" rx="8"/><text class="rail-t" transform="translate(347 184) rotate(90)" text-anchor="middle" dy="4">PayPal</text>
-    ${arrow(326, 22, 172, 22, "ft")}${t(250, 15, "amt", `${money(n.paid)} sale`, "middle")}
-    ${arrow(172, 52, 326, 52, "ft")}${t(250, 45, "amt", `${money(n.fee)} fee`, "middle")}
-    ${arrow(326, 190, 172, 190, "ft")}${t(250, 183, "amt", `${money(n.publisher)} to Waggle`, "middle")}
-    ${arrow(172, 322, 326, 322, "ft")}${t(250, 315, "amt", `${money(n.paid)} you pay`, "middle")}
-    ${arrow(326, 352, 172, 352, "ft", true)}${t(250, 345, "amt honey", `+${money(n.user)} back to you`, "middle")}
+    <rect class="rail" x="312" y="0" width="48" height="368" rx="10"/><text class="rail-t" transform="translate(336 184) rotate(90)" text-anchor="middle" dy="5">PayPal</text>
+    ${arrow(304, 22, 172, 22, "ft")}${t(238, 15, "amt", `${money(n.paid)} sale`, "middle")}
+    ${arrow(172, 52, 304, 52, "ft")}${t(238, 45, "amt", `${money(n.fee)} fee`, "middle")}
+    ${arrow(304, 190, 172, 190, "ft")}${t(238, 183, "amt", `${money(n.publisher)} to Waggle`, "middle")}
+    ${arrow(172, 322, 304, 322, "ft")}${t(238, 315, "amt", `${money(n.paid)} you pay`, "middle")}
+    ${arrow(304, 352, 172, 352, "ft", true)}${t(238, 345, "amt honey", `+${money(n.user)} to you`, "middle")}
   </svg>`;
 
   return `<figure class="flow">${wide}${tall}</figure>`;
@@ -233,7 +233,7 @@ export function landingPage(config: Config, campaigns: Campaign[]) {
   <p class="lead">Honey for agents. When your AI agent shops for you, sellers compete for its pick. Waggle brings their offers to your agent,
   makes it say which one is sponsored, and when you buy through one, ${share} of the seller's fee comes back to you in PayPal cash.</p>
   <div class="install"><span class="prompt">$</span><code id="cc">claude mcp add --transport http waggle <span class="hl">${esc(url)}</span></code><button class="btn light" data-copy="cc">Copy</button></div>
-  <p class="hint">One line in Claude Code. <a href="#clients">Codex, Claude, ChatGPT, Cursor and VS Code</a> take the same URL. No account, no login: adding it is the opt-in, removing it the opt-out.</p>
+  <p class="hint">One line in Claude Code. <a href="#clients">Codex, Claude, ChatGPT, Cursor and VS Code</a> take the same URL. No account, no login. It sees <a href="#rules">your agent's search words, never your conversation</a>.</p>
 </div>
 
 ${conversation(config, campaigns)}
