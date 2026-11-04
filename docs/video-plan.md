@@ -23,7 +23,7 @@ windows make every line of text smaller and the recording harder to drive. PayPa
 
 ## Script
 
-About 2:40 with ~250 words of narration, in short plain sentences that are easy to say, so the screen gets room to show the run. Read each line as its own
+About 2:40 with ~290 words of narration, in short plain sentences that are easy to say, so the screen gets room to show the run. Read each line as its own
 take, so lines can be re-recorded and cut by transcript. "Browser" and "Terminal" say which app is on screen;
 ⌘Tab between them. The editor's auto-zoom follows clicks; "zoom" means a zoom keyframe set by hand, for the
 scenes with no clicks.
