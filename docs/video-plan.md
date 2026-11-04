@@ -13,7 +13,9 @@ waiting time is cut.
 
 No slides. Every title, diagram and rule the video needs is already on the site (waggle-agents.fly.dev): the
 headline is the title and end card, *One purchase, one split* is the money-flow diagram, *What Waggle never does*
-is the rules. The video shows those sections and zooms in on them in the editor.
+is the rules. The video shows those sections and zooms in on them in the editor, and it runs down the page
+once, in the page's own order: headline, install, then the run in the terminal and PayPal, then back to the
+page for the diagram and the rules, explaining what was just seen. The only scroll back up is the ending.
 
 Two apps, each full screen: the browser and the terminal with the agent. Switch with ⌘Tab; the switch is
 fast enough to stay in the cut, or the editor trims it. Side by side was considered and set aside: two half
@@ -21,22 +23,22 @@ windows make every line of text smaller and the recording harder to drive. PayPa
 
 ## Script
 
-About 2:40 with ~220 words of narration, so the screen gets room to show the run. Read each line as its own
+About 2:40 with ~290 words of narration, so the screen gets room to show the run. Read each line as its own
 take, so lines can be re-recorded and cut by transcript. "Browser" and "Terminal" say which app is on screen;
 ⌘Tab between them. The editor's auto-zoom follows clicks; "zoom" means a zoom keyframe set by hand, for the
 scenes with no clicks.
 
 | Time | On screen | Narration |
 | --- | --- | --- |
-| 0:00–0:12 | Terminal: the agent open, banner cleared, the camping request typed in, not sent. | AI agents are starting to shop for us. Sellers already pay to win customers like that. Today none of that money reaches you, and you can't tell when a pick was paid for. |
-| 0:12–0:18 | ⌘Tab to the browser: waggle-agents.fly.dev at the top. Zoom on the headline. | This is Waggle: Honey for agents. |
-| 0:18–0:32 | Browser: scroll to *One purchase, one split*. Zoom follows the narration across the diagram: Seller → the arrow to Waggle → the arrow to You → the PayPal bar → the honey arrow back to You. | A seller offers a deal and a fee. Waggle brings that offer to your agent, marked sponsored. You approve the payment in PayPal, and the seller's fee is split: part to Waggle, part back to you. |
-| 0:32–0:44 | Browser: scroll back to the top, Copy on the install line. ⌘Tab to the terminal: paste → added. | Adding it is one line. No account, no login. Adding Waggle is the opt-in; removing it is the opt-out. |
-| 0:44–1:20 | Terminal: send the request. `search_products · waggle` → the results → the offer marked sponsored → the recommendation (zoom on the sentence that names the sponsor). | I ask for a two-person tent under eighty dollars. Waggle returns the normal results, complete and in their own order, and one offer kept apart, marked sponsored. When my agent recommends that tent, it says so in the same sentence: sponsored by Acme Outdoor, ten percent off, and three fifty back to me. |
-| 1:20–1:40 | Terminal: "Yes, go ahead." → `buy_product` → the PayPal link. ⌘Tab to the browser: the sandbox approval page (already logged in) → approve. | Nothing is bought without me. The agent creates a PayPal order, and I approve it myself, in PayPal. |
-| 1:40–2:15 | Browser: PayPal returns to Waggle, "Paid $71.10", zoom on "+$3.50". ⌘Tab to the terminal: "Done." → `complete_purchase` → payout SUCCESS. ⌘Tab to the browser: sandbox.paypal.com activity with the $3.50 coming in. | PayPal brings me back to Waggle. I paid seventy-one ten. Acme's five-dollar fee is split in one step with PayPal Payouts: seventy percent, three fifty, back to the account I just paid with, and a dollar fifty to Waggle. Nothing to set up. And here it is, in my PayPal activity. |
-| 2:15–2:32 | Browser: back to the site, scroll to *What Waggle never does*. Zoom on one rule heading per sentence: *Mix offers into results*, *Sell the slot to the highest bidder*, *Show sellers who you are*, *Move money without you*. | A few rules are built into the code. Offers never mix into results. The best deal for you wins the slot, not the highest bidder. Sellers never see who you are. And every payment is yours to approve. |
-| 2:32–2:40 | Browser: scroll to the top. Zoom until the headline fills the frame; hold. | Waggle. Your agent finds the deal. PayPal pays you back. |
+| 0:00–0:12 | Browser: waggle-agents.fly.dev at the top, as it is. No zoom yet. | AI agents are starting to shop for us. Sellers already pay to win customers like that. Today none of that money reaches you, and you can't tell when a pick was paid for. |
+| 0:12–0:20 | Zoom on the headline. | This is Waggle: Honey for agents. Sellers' offers reach your agent, marked sponsored, and part of their fee comes back to you. |
+| 0:20–0:34 | Zoom on the install line → Copy. ⌘Tab to the terminal, at the shell prompt in an empty folder: paste → added → `claude` → the agent opens. | Adding it is one line, in the shell. No account, no login. Adding Waggle is the opt-in; removing it is the opt-out. Then I start my agent. |
+| 0:34–1:10 | Terminal: type and send the request. `search_products · waggle` → the results → the offer marked sponsored → the recommendation (zoom on the sentence that names the sponsor). | I ask for a two-person tent under eighty dollars. Waggle returns the normal results, complete and in their own order, and one offer kept apart, marked sponsored. When my agent recommends that tent, it says so in the same sentence: sponsored by Acme Outdoor, ten percent off, and three fifty back to me. |
+| 1:10–1:30 | "Yes, go ahead." → `buy_product` → the PayPal link. ⌘Tab to the browser: the sandbox approval page (already logged in) → approve. | Nothing is bought without me. The agent creates a PayPal order, and I approve it myself, in PayPal. |
+| 1:30–2:05 | Browser: PayPal returns to Waggle, "Paid $71.10", zoom on "+$3.50". ⌘Tab to the terminal: "Done." → `complete_purchase` → payout SUCCESS. ⌘Tab to the browser: sandbox.paypal.com activity with the $3.50 coming in. | PayPal brings me back to Waggle. I paid seventy-one ten. Acme's five-dollar fee is split in one step with PayPal Payouts: seventy percent, three fifty, back to the account I just paid with, and a dollar fifty to Waggle. Nothing to set up. And here it is, in my PayPal activity. |
+| 2:05–2:20 | Browser: back to the site, scroll down to *One purchase, one split*. Zoom follows the narration across the diagram: Seller → the arrow to Waggle → the arrow to You → the PayPal bar → the honey arrow back to You. | Here is what just happened. Acme offered a deal and a fee. Waggle brought that offer to my agent, marked sponsored. I paid through PayPal, and PayPal split the fee: part to Waggle, part back to me. |
+| 2:20–2:34 | Scroll on to *What Waggle never does*. Zoom on one rule heading per sentence: *Mix offers into results*, *Sell the slot to the highest bidder*, *Show sellers who you are*, *Move money without you*. | A few rules are built into the code. Offers never mix into results. The best deal for you wins the slot, not the highest bidder. Sellers never see who you are. And every payment is yours to approve. |
+| 2:34–2:42 | Scroll smoothly back to the top. Zoom until the headline fills the frame; hold. | Waggle. Your agent finds the deal. PayPal pays you back. |
 
 The request to type, the same as on the site:
 
@@ -77,7 +79,9 @@ generate captions locally and cut by deleting sentences from the transcript. Fin
   ⌘Tab always lands on the other one.
 - Do a dry run of the full flow and watch the sponsored block and the recommendation sentence wrap: they are
   what the video zooms on.
-- Start with Waggle removed from the agent (`claude mcp remove waggle`), so the install scene is real.
+- Start with Waggle removed from the agent (`claude mcp remove waggle`, and once more with `-s user`), so the
+  install scene is real. `claude mcp add` is a shell command, not something typed inside Claude: the terminal
+  starts at the shell prompt in an empty folder outside the repo, and `claude` is started after the install.
 - Log the buyer sandbox account in to sandbox.paypal.com before recording: no password on screen.
 - Clear the agent's start banner and keep the browser free of bookmarks, extensions and other tabs: no third-party
   marks beyond the agent's own text.
