@@ -1,4 +1,4 @@
-# Demo video plan (draft)
+# Demo video plan
 
 Required submission: under 3 minutes, public on YouTube, English, the real product working on a real device,
 no third-party trademarks or music without permission. It is one of five equally weighted judging criteria
@@ -11,21 +11,28 @@ In 2:45, without cuts that hide anything: whose problem it is, the agent finding
 sponsored right then, the PayPal payment, and the payback actually arriving. The demo part is a real run; only
 waiting time is cut.
 
+No slides. Every title, diagram and rule the video needs is already on the site (waggle-agents.fly.dev): the
+headline is the title and end card, *One purchase, one split* is the money-flow diagram, *What Waggle never does*
+is the rules. The video shows those sections and zooms in on them in the editor. Three screens, all real: the
+site, the terminal with the agent, and PayPal.
+
 ## Script
 
-About 2:40 with ~220 words of narration, so the screen gets room to show the run. The product parts are one real run on the hosted demo; only
-waiting is cut. Cards are `docs/video/flow.html` (open at 1920×1080, → or Space to advance, `#scene.step` in the
-URL jumps to a card). Read each line as its own take, so lines can be re-recorded and cut by transcript.
+About 2:40 with ~220 words of narration, so the screen gets room to show the run. Read each line as its own
+take, so lines can be re-recorded and cut by transcript. "Zoom" means a zoom keyframe set in the editor; those
+scenes have no clicks for auto-zoom to follow.
 
 | Time | On screen | Narration |
 | --- | --- | --- |
 | 0:00–0:12 | Terminal with the agent open, banner cleared. The camping request typed in, not sent. | AI agents are starting to shop for us. Sellers already pay to win customers like that. Today none of that money reaches you, and you can't tell when a pick was paid for. |
-| 0:12–0:30 | Cards `#0.0` (title), then `#1.0` → `#1.4`, one step per sentence. | This is Waggle: Honey for agents. A seller offers a deal and a fee. Waggle brings that offer to your agent, marked sponsored. You approve the payment in PayPal, and the seller's fee is split: part to Waggle, part back to you. |
-| 0:30–0:42 | waggle-agents.fly.dev → Copy on the install line → paste into the terminal → added. | Adding it is one line. No account, no login. Adding Waggle is the opt-in; removing it is the opt-out. |
-| 0:42–1:20 | Send the request. `search_products · waggle` → the results → the offer marked sponsored → the recommendation (zoom on the sentence that names the sponsor). | I ask for a two-person tent under eighty dollars. Waggle returns the normal results, complete and in their own order, and one offer kept apart, marked sponsored. When my agent recommends that tent, it says so in the same sentence: sponsored by Acme Outdoor, ten percent off, and three fifty back to me. |
+| 0:12–0:18 | Browser: waggle-agents.fly.dev at the top. Zoom on the headline. | This is Waggle: Honey for agents. |
+| 0:18–0:32 | Scroll to *One purchase, one split*. Zoom follows the narration across the diagram: Seller → the arrow to Waggle → the arrow to You → the PayPal bar → the honey arrow back to You. | A seller offers a deal and a fee. Waggle brings that offer to your agent, marked sponsored. You approve the payment in PayPal, and the seller's fee is split: part to Waggle, part back to you. |
+| 0:32–0:44 | Scroll back to the top. Zoom on the install line → Copy → paste into the terminal → added. | Adding it is one line. No account, no login. Adding Waggle is the opt-in; removing it is the opt-out. |
+| 0:44–1:20 | Terminal. Send the request. `search_products · waggle` → the results → the offer marked sponsored → the recommendation (zoom on the sentence that names the sponsor). | I ask for a two-person tent under eighty dollars. Waggle returns the normal results, complete and in their own order, and one offer kept apart, marked sponsored. When my agent recommends that tent, it says so in the same sentence: sponsored by Acme Outdoor, ten percent off, and three fifty back to me. |
 | 1:20–1:40 | "Yes, go ahead." → `buy_product` → the PayPal link → the sandbox approval page (already logged in) → approve. | Nothing is bought without me. The agent creates a PayPal order, and I approve it myself, in PayPal. |
-| 1:40–2:15 | PayPal returns to Waggle: "Paid $71.10", "+$3.50". Back in the terminal: "Done." → `complete_purchase` → payout SUCCESS. Then sandbox.paypal.com activity with the $3.50 coming in. | PayPal brings me back to Waggle. I paid seventy-one ten. Acme's five-dollar fee is split in one step with PayPal Payouts: seventy percent, three fifty, back to the account I just paid with, and a dollar fifty to Waggle. Nothing to set up. And here it is, in my PayPal activity. |
-| 2:15–2:40 | Cards `#2.0` → `#2.4`, one rule per sentence, then `#3.0` (end card). | A few rules are built into the code. Offers never mix into results. The best deal for you wins the slot, not the highest bidder. Sellers never see who you are. And every payment is yours to approve. Waggle. Your agent finds the deal. PayPal pays you back. |
+| 1:40–2:15 | PayPal returns to Waggle: "Paid $71.10", zoom on "+$3.50". Back in the terminal: "Done." → `complete_purchase` → payout SUCCESS. Then sandbox.paypal.com activity with the $3.50 coming in. | PayPal brings me back to Waggle. I paid seventy-one ten. Acme's five-dollar fee is split in one step with PayPal Payouts: seventy percent, three fifty, back to the account I just paid with, and a dollar fifty to Waggle. Nothing to set up. And here it is, in my PayPal activity. |
+| 2:15–2:32 | Browser: scroll to *What Waggle never does*. Zoom on one rule heading per sentence: *Mix offers into results*, *Sell the slot to the highest bidder*, *Show sellers who you are*, *Move money without you*. | A few rules are built into the code. Offers never mix into results. The best deal for you wins the slot, not the highest bidder. Sellers never see who you are. And every payment is yours to approve. |
+| 2:32–2:40 | Scroll to the top. The headline fills the frame; hold. | Waggle. Your agent finds the deal. PayPal pays you back. |
 
 The request to type, the same as on the site:
 
@@ -38,9 +45,9 @@ The request to type, the same as on the site:
 - [x] A purchase tool the agent calls to create the order (step 1 of `spikes/paypal-sandbox.mjs`).
 - [x] The hosted service and site: the front page with the install line, and the return page that completes the
   purchase and shows the payback. Those are the only web surfaces the product has, so they are the only ones the
-  video shows: no screen exists for the video's sake.
-- [x] Deploy it, so the video shows the real URL (redeploy after the latest site changes).
-- [x] Title, flow, rules and end cards: `docs/video/flow.html`, in the site's type and colours.
+  video shows: no screen exists for the video's sake, and there are no slides.
+- [ ] Redeploy after the latest site changes (the neutral palette, the phone diagram, the install hint), so the
+  video shows the real URL as it is.
 
 ## Tools
 
@@ -48,7 +55,8 @@ Default: record and edit in one app, either [Screen Studio](https://screen.studi
 [Prequel](https://prequel.sh/) (7-day full trial, so start it in the recording week). Both auto-zoom on clicks,
 generate captions locally and cut by deleting sentences from the transcript. Final pick at recording time.
 
-- **Diagrams and title cards:** `docs/video/flow.html`, recorded as a screen like the rest.
+- **Titles, diagram, rules:** the site's own sections, with manual zoom keyframes in the editor. The diagram scene
+  is one pan across *One purchase, one split*; the rules scene is four zooms, one per heading.
 - **Captions:** generated by the recorder, burned in or uploaded to YouTube as SRT.
 - Avoid any tool tier that adds a watermark: it is a third-party mark in the video.
 - Considered and set aside: Cap (free plan is personal use only, no transcript cuts), Open Screen (archived),
@@ -59,7 +67,8 @@ generate captions locally and cut by deleting sentences from the transcript. Fin
 - Sandbox payouts can stay `PENDING` or `UNCLAIMED`. Check the receiving accounts and do one full rehearsal.
 - English voiceover and captions. No music, or royalty-free only. A team member's voice over a synthetic one: the
   site lost its template look, the narration shouldn't bring it back.
-- 1080p or higher; enlarge terminal and browser fonts.
+- 1080p or higher; enlarge terminal and browser fonts. Browser window at the recording size with the site at
+  100% zoom: the money-flow diagram should show its wide layout (it switches to the phone layout under 900px).
 - Start with Waggle removed from the agent (`claude mcp remove waggle`), so the install scene is real.
 - Log the buyer sandbox account in to sandbox.paypal.com before recording: no password on screen.
 - Clear the agent's start banner and keep the browser free of bookmarks, extensions and other tabs: no third-party
