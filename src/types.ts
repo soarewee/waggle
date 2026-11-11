@@ -1,4 +1,4 @@
-// Offer shapes follow Agentic AdFi's sponsored-offer schema (v1) so Waggle stays compatible with it.
+// The shapes of a seller's campaign and of the sponsored offer made from it.
 
 /** A better deal the advertiser gives the user on top of the fee share. */
 export interface Deal {
@@ -35,7 +35,7 @@ export interface Campaign {
 }
 
 /**
- * The offer as Waggle delivers it to the user's agent. AdFi's `user` wallet and signatures are left out:
+ * The offer as Waggle delivers it to the user's agent. It carries nothing about the user:
  * the payback goes to the user's PayPal account, which stays on Waggle's side and never reaches the advertiser.
  */
 export interface SponsoredOffer {

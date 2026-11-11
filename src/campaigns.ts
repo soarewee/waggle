@@ -1,5 +1,5 @@
 // Sellers' campaigns come from a JSON file, not from code: a campaign is what a seller registers with Waggle.
-// The shape follows Agentic AdFi's sponsored-offer schema; every field is checked before the service starts.
+// Every field is checked before the service starts.
 
 import { readFileSync } from "node:fs";
 import { z } from "zod";

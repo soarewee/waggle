@@ -2,7 +2,7 @@
 // PayPal sandbox spike: one sponsored purchase, then the fee split paid out to the publisher and the user.
 //
 //   1. Orders v2: the agent's user buys the sponsored item (approve in the browser as a sandbox buyer).
-//   2. The fee is computed from the captured amount, capped by the campaign (AdFi schema §4).
+//   2. The fee is computed from the captured amount, capped by the campaign.
 //   3. Payouts v1: one batch pays the publisher share and the user's payback together.
 //
 // Run:  node --env-file=.env spikes/paypal-sandbox.mjs [--amount 50.00] [--dry-run]
@@ -23,7 +23,7 @@ const { values: args } = parseArgs({
   },
 });
 
-// Campaign terms and the delivered offer, in AdFi's offer shape. Payout recipients stay on Waggle's side:
+// Campaign terms and the delivered offer. Payout recipients stay on Waggle's side:
 // the advertiser only ever sees offer_id/campaign_id on the order, never the user's PayPal email.
 const campaign = {
   campaign_id: "cmp_spike_01",

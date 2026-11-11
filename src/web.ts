@@ -278,7 +278,7 @@ ${conversation(config, campaigns)}
       <h2>A campaign is a product, a deal and a fee.</h2>
       <p>A seller registers a campaign: the product, an optional deal, a fee per sale and a cap on it as a share of the amount paid. ${shown ? `This is ${esc(shown.advertiser.name)}'s campaign in the demo.` : ""}</p>
       <p>Campaigns on the products a search found compete for the one slot, and the one worth the most to the user wins. The fee is charged only
-      on captured payments and split in one step. The shape is <a href="https://github.com/soarewee/waggle#campaigns-how-sellers-get-in">Agentic AdFi's sponsored-offer schema</a>.</p>
+      on captured payments and split in one step. The campaign format is <a href="https://github.com/soarewee/waggle#campaigns-how-sellers-get-in">in the README</a>.</p>
       <p class="muted">In this demo Waggle is also the store, so the offer and the purchase meet in one PayPal order. The README says where that goes next.</p>
     </div>
     ${shown ? `<pre>${esc(JSON.stringify(shown, null, 2))}</pre>` : ""}

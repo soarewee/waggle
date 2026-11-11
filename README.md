@@ -96,7 +96,7 @@ campaigns live in `campaigns.json`, checked on start-up; this is Acme's:
 }
 ```
 
-The shape is Agentic AdFi's sponsored-offer schema, so a Waggle campaign is an AdFi campaign. Matching: a search
+Matching: a search
 finds products; the live campaigns on those products compete for one slot; the one with the largest user benefit
 wins; an offer with a fresh `offer_id` is minted for that search and expires with the campaign.
 

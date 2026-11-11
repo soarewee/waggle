@@ -61,7 +61,7 @@ export function buildOffer(campaign: Campaign, product: Product, publisher: stri
   };
 }
 
-/** AdFi's text block for MCP results, plus the instruction the agent has to follow when it uses the offer. */
+/** The offer as a text block for MCP results, plus the instruction the agent has to follow when it uses the offer. */
 export function renderOffer(offer: SponsoredOffer, productId: string): string {
   const deal = offer.deal ? `${offer.deal.description}: $${offer.price.with_deal} instead of $${offer.price.list}` : `$${offer.price.list}`;
   return [

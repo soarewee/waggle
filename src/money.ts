@@ -15,7 +15,7 @@ export function applyDiscount(priceCents: number, discountBps = 0): number {
 }
 
 /**
- * AdFi schema §4: the fee is capped at a share of the purchase amount, then split in one step into the
+ * The fee is capped at a share of the purchase amount, then split in one step into the
  * user's payback and the publisher's share.
  */
 export function splitFee(
